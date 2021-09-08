@@ -35,7 +35,8 @@ class VariantsSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    variants=VariantsSerializer(many=True,allow_null=True)
+    # variants=VariantsSerializer(many=True,allow_null=True)
+    # provider=serializers.ReadOnlyField()
     class Meta:
         model=Product
         fields=[
@@ -43,8 +44,7 @@ class ProductSerializer(serializers.ModelSerializer):
             "name",
             "expiry_date",
             "status",
-            "provider",
+            # "provider",
             "image",
             "description",
-            "variants"
         ]
