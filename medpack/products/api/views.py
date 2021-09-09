@@ -7,6 +7,8 @@ from .serializers import ProductSerializer,Product
 class ProductListApiView(ListAPIView):
     serializer_class = ProductSerializer
 
+    permission_classes = []
+
     def get_queryset(self):
         return Product.objects.all()
 
