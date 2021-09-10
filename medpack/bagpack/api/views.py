@@ -1,4 +1,5 @@
 from rest_framework.generics import RetrieveAPIView,CreateAPIView
+from django.db.models import F
 from .serializers import BagPackSerializer,BagPack,BagPacItemSerializer
 from medpack.bagpack.models import BagPackStatus
 from ..utils import get_active_cart
@@ -9,8 +10,8 @@ class ItemToCartApiView(CreateAPIView):
 
     def perform_create(self, serializer):
         cart=get_active_cart(self.request.user)
-        instance=cart.items.create(**serializer.validated_data)
-        return instance
+        serializer.validated_data['bagpack']=cart
+        serializer.save()
 
 
 

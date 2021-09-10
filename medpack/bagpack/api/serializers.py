@@ -1,3 +1,4 @@
+from django.db.models import F
 from rest_framework import serializers
 from medpack.bagpack.models import BagPack,BagPackItem
 from medpack.products.api.serializers import ProductSerializer,Product
@@ -15,6 +16,15 @@ class BagPacItemSerializer(serializers.ModelSerializer):
             "quantity",
             'product_id'
         ]
+
+
+    def create(self, validated_data):
+        bagpack=validated_data['bagpack']
+        instance, _ = bagpack.items.get_or_create(product=validated_data['product'])
+        instance.quantity = F("quantity") + validated_data['quantity']
+        instance.save()
+        instance.refresh_from_db()
+        return instance
 
 class BagPackSerializer(serializers.ModelSerializer):
     items=BagPacItemSerializer(many=True)

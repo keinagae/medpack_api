@@ -15,4 +15,4 @@ class BagPack(models.Model):
 class BagPackItem(models.Model):
     bagpack=models.ForeignKey(BagPack,on_delete=models.CASCADE,related_name="items")
     product=models.ForeignKey("products.Product",on_delete=models.CASCADE)
-    quantity=models.IntegerField(default=1)
+    quantity=models.IntegerField(default=0)
