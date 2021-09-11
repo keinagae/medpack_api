@@ -53,6 +53,7 @@ urlpatterns += [
     path("api/", include("config.api_router")),
     path("api/products/",include("medpack.products.api.urls")),
     path("api/cart/",include("medpack.bagpack.api.urls")),
+    path("api/order/",include("medpack.orders.api.urls")),
     # DRF auth token
     # path("api/auth-token/", obtain_auth_token),
 ]

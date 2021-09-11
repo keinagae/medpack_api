@@ -21,9 +21,10 @@ class BagPacItemSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         bagpack=validated_data['bagpack']
         instance, _ = bagpack.items.get_or_create(product=validated_data['product'])
-        instance.quantity = F("quantity") + validated_data['quantity']
+        instance.quantity += validated_data['quantity']
         instance.save()
-        instance.refresh_from_db()
+        if instance.quantity<=0:
+            instance.delete()
         return instance
 
 class BagPackSerializer(serializers.ModelSerializer):
