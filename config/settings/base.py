@@ -82,7 +82,9 @@ THIRD_PARTY_APPS = [
     'nested_admin',
     "drf_yasg",
     "rest_framework.authtoken",
-    "djoser"
+    "djoser",
+    "cloudinary_storage",
+    "cloudinary"
     # 'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
 ]
 
@@ -360,3 +362,13 @@ DJOSER = {
         'current_user': 'medpack.users.api.serializers.UserSerializer',
     },
 }
+
+DROPBOX_OAUTH2_TOKEN=env("DROPBOX_OAUTH2_TOKEN")
+# DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
+DROPBOX_ROOT_PATH=""
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': env('CLOUD_NAME'),
+    'API_KEY': env("API_KEY"),
+    'API_SECRET': env('API_SECRET'),
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

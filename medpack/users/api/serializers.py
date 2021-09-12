@@ -22,6 +22,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         if name:
             instance.user.name=name
             instance.user.save()
+
         return super(UserProfileSerializer, self).update(instance,validated_data)
 
 

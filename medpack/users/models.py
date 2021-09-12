@@ -1,3 +1,5 @@
+from typing import Optional, Iterable
+
 from django.contrib.auth.models import AbstractUser
 from django.db.models import CharField,EmailField,Model,OneToOneField,CASCADE,ImageField,BooleanField
 from django.db.models.signals import post_save
@@ -32,6 +34,11 @@ class UserProfile(Model):
     phone=CharField(max_length=30,null=True)
     image=ImageField(null=True,blank=True)
     is_completed=BooleanField(default=False)
+
+    def save(self,**kwargs) -> None:
+        if self.address and self.phone:
+            self.is_completed=True
+        super(UserProfile, self).save(**kwargs)
 
 
 @receiver(post_save, sender=User, dispatch_uid="user_created")
