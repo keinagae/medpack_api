@@ -320,6 +320,7 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.TokenAuthentication",
     ),
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend','rest_framework.filters.SearchFilter']
 }
 
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
@@ -371,4 +372,4 @@ CLOUDINARY_STORAGE = {
     'API_KEY': env("API_KEY"),
     'API_SECRET': env('API_SECRET'),
 }
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

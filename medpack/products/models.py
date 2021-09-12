@@ -24,6 +24,12 @@ class Product(WithTimeStamps, models.Model):
     provider = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     status = models.CharField(max_length=30, default=ProductStatusEnum.PENDING, choices=ProductStatusEnum.choices)
 
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering=["-id"]
+
 
 class Variant(WithTimeStamps, models.Model):
     product = models.ForeignKey("Product", on_delete=models.CASCADE)

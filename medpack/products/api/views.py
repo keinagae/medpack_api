@@ -9,6 +9,8 @@ class ProductListApiView(ListAPIView):
 
     permission_classes = []
 
+    search_fields = ['name', 'description']
+
     def get_queryset(self):
         return Product.objects.all().order_by("-id")
 

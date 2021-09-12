@@ -43,29 +43,26 @@ class ProductAdmin(NestedModelAdmin):
         'quantity',
         'provider',
     )
-    inlines = [
-        InlineVariantAdmin
-    ]
 
     list_filter = ('expiry_date', 'provider')
     search_fields = ('name',)
+#
+#
+# @admin.register(Variant)
+# class VariantAdmin(admin.ModelAdmin):
+#     list_display = ('id', 'product', 'name')
+#     list_filter = ('product',)
+#     search_fields = ('name',)
 
 
-@admin.register(Variant)
-class VariantAdmin(admin.ModelAdmin):
-    list_display = ('id', 'product', 'name')
-    list_filter = ('product',)
-    search_fields = ('name',)
-
-
-@admin.register(VariantAttribute)
-class VariantAttributeAdmin(admin.ModelAdmin):
-    list_display = ('id', 'variant', 'name', )
-    list_filter = ('variant',)
-    search_fields = ('name',)
-
-
-@admin.register(VariantAttributeValues)
-class VariantAttributeValuesAdmin(admin.ModelAdmin):
-    list_display = ('id', 'attribute', 'value')
-    list_filter = ('attribute',)
+# @admin.register(VariantAttribute)
+# class VariantAttributeAdmin(admin.ModelAdmin):
+#     list_display = ('id', 'variant', 'name', )
+#     list_filter = ('variant',)
+#     search_fields = ('name',)
+#
+#
+# @admin.register(VariantAttributeValues)
+# class VariantAttributeValuesAdmin(admin.ModelAdmin):
+#     list_display = ('id', 'attribute', 'value')
+#     list_filter = ('attribute',)

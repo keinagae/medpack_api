@@ -14,6 +14,9 @@ class Order(models.Model):
     status=models.CharField(max_length=30,default=OrderStatus.PENDING,choices=OrderStatus.choices)
     created_at=models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering=["-id"]
+
 
 class OrderItem(models.Model):
     order=models.ForeignKey(Order,on_delete=models.CASCADE,related_name="items")
