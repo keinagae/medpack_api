@@ -1,5 +1,7 @@
 from django.contrib.auth.models import AbstractUser
-from django.db.models import CharField,EmailField
+from django.db.models import CharField,EmailField,Model,OneToOneField,CASCADE,ImageField,BooleanField
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
@@ -22,3 +24,18 @@ class User(AbstractUser):
 
         """
         return reverse("users:detail", kwargs={"username": self.username})
+
+
+class UserProfile(Model):
+    user=OneToOneField("User",on_delete=CASCADE,related_name="profile")
+    address=CharField(max_length=255,null=True)
+    phone=CharField(max_length=30,null=True)
+    image=ImageField(null=True,blank=True)
+    is_completed=BooleanField(default=False)
+
+
+@receiver(post_save, sender=User, dispatch_uid="user_created")
+def update_stock(sender, instance, **kwargs):
+    created=kwargs['created']
+    if created:
+        UserProfile.objects.create(user=instance)

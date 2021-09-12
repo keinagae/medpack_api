@@ -17,6 +17,12 @@ class BagPacItemSerializer(serializers.ModelSerializer):
             'product_id'
         ]
 
+    def validate(self, attrs):
+        quantity=attrs['quantity']
+        product=attrs['product']
+        if quantity>product.quantity:
+            raise serializers.ValidationError({"quantity":"Insufficient Quantity"})
+        return attrs
 
     def create(self, validated_data):
         bagpack=validated_data['bagpack']

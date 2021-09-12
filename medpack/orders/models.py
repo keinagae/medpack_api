@@ -12,6 +12,7 @@ class OrderStatus(models.TextChoices):
 class Order(models.Model):
     user=models.ForeignKey(get_user_model(),on_delete=models.CASCADE)
     status=models.CharField(max_length=30,default=OrderStatus.PENDING,choices=OrderStatus.choices)
+    created_at=models.DateTimeField(auto_now_add=True)
 
 
 class OrderItem(models.Model):

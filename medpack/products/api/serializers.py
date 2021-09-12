@@ -44,6 +44,7 @@ class ProductSerializer(serializers.ModelSerializer):
             "name",
             "expiry_date",
             "status",
+            "quantity",
             # "provider",
             "image",
             "description",
