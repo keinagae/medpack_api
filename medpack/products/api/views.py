@@ -2,6 +2,7 @@ from rest_framework.parsers import MultiPartParser
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.generics import ListAPIView
 from .serializers import ProductSerializer,Product
+from medpack.products.models import ProductStatusEnum
 
 
 class ProductListApiView(ListAPIView):
@@ -12,7 +13,7 @@ class ProductListApiView(ListAPIView):
     search_fields = ['name', 'description']
 
     def get_queryset(self):
-        return Product.objects.all().order_by("-id")
+        return Product.objects.filter(quantity__gt=0,status__in=[ProductStatusEnum.PENDING,ProductStatusEnum.APPROVED]).order_by("-id")
 
 class MyProductViewSet(ModelViewSet):
     serializer_class=ProductSerializer
